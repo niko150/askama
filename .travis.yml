@@ -1,3 +1,4 @@
+sudo: false
 language: rust
 rust:
   - stable
@@ -5,8 +6,6 @@ rust:
   - nightly
 script:
   - cargo test --all
-before_install:
-  - sudo apt-get update
 addons:
   apt:
     packages:
@@ -24,11 +23,11 @@ after_success: |
   cd build &&
   cmake .. &&
   make &&
-  sudo make install &&
+  make install DESTDIR=../../tmp &&
   cd ../.. &&
   rm -rf kcov-master &&
   cargo clean &&
   mkdir -p target/cov &&
-  kcov --exclude-pattern=/.cargo,/usr/lib --verify target/cov cargo test --all &&
+  ./tmp/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --verify target/cov cargo test --all &&
   bash <(curl -s https://codecov.io/bash) &&
   echo "Uploaded code coverage"

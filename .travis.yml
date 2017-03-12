@@ -4,7 +4,7 @@ rust:
   - beta
   - nightly
 script:
-  - cargo test --all
+  - RUST_BACKTRACE=1 cargo test --all
 before_install:
   - sudo apt-get update
 addons:

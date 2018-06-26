@@ -10,10 +10,13 @@ nightly = ["rocket", "rocket_codegen", "askama/with-rocket"]
 
 [dependencies]
 askama = { path = "../askama", version = "*", features = ["with-iron", "serde-json"] }
+askama_compile = { path = "../askama_compile", version = "*" }
 iron = "0.6"
 rocket = { version = "0.3", optional = true }
 rocket_codegen = { version = "0.3", optional = true }
 serde_json = "1.0"
+syn = "0.14"
+runtime-macros = { path = "../../runtime-macros" }
 
 [build-dependencies]
 askama = { path = "../askama", version = "*", features = ["with-iron", "serde-json"] }
